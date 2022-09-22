@@ -41,3 +41,11 @@ ALTER TABLE animals ADD COLUMN species_id INT
 ALTER TABLE animals ADD COLUMN owner_id INT
  REFERENCES owners(id)
  ON DELETE CASCADE;
+
+/* Create a table named vets*/
+CREATE TABLE vets(id INT GENERATED ALWAYS AS IDENTITY, name VARCHAR(50), age INT, date_of_graduation DATE, PRIMARY KEY(id));
+/* Create a "join table" called specializations to handle this relationship.*/
+CREATE TABLE specializations(vets_id INT NOT NULL, species_id INT NOT NULL, FOREIGN KEY(vets_id) REFERENCES vets(id) ON UPDATE CASCADE, FOREIGN KEY(species_id) REFERENCES species(id) ON UPDATE CASCADE);
+/* Create a "join table" called visits to handle this relationship, it should also keep track of the date of the visit.*/
+CREATE TABLE visits(animals_id INT NOT NULL, vets_id INT NOT NULL, date_of_visit DATE, FOREIGN KEY(animals_id) REFERENCES animals(id) ON UPDATE CASCADE, FOREIGN KEY(vets_id) REFERENCES vets(id) ON UPDATE CASCADE);
+
