@@ -49,3 +49,11 @@ CREATE TABLE specializations(vets_id INT NOT NULL, species_id INT NOT NULL, FORE
 /* Create a "join table" called visits to handle this relationship, it should also keep track of the date of the visit.*/
 CREATE TABLE visits(animals_id INT NOT NULL, vets_id INT NOT NULL, date_of_visit DATE, FOREIGN KEY(animals_id) REFERENCES animals(id) ON UPDATE CASCADE, FOREIGN KEY(vets_id) REFERENCES vets(id) ON UPDATE CASCADE);
 
+/* Add INDEX*/
+CREATE INDEX visits_id_idx ON visits(vets_id);
+-- To verify run ' explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;'--
+CREATE INDEX visits_id_idx ON visits(vets_id);
+-- To verify run ' explain analyze SELECT * FROM visits where vet_id = 2;'--
+CREATE INDEX visits_id_idx ON visits(vets_id);
+CREATE INDEX owners_email_idx ON owners(email);
+-- To verify this you run 'explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';'--
