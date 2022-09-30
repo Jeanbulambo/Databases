@@ -57,3 +57,53 @@ CREATE INDEX visits_id_idx ON visits(vets_id);
 CREATE INDEX visits_id_idx ON visits(vets_id);
 CREATE INDEX owners_email_idx ON owners(email);
 -- To verify this you run 'explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';'--
+-- schema with drawsql
+
+CREATE TABLE "visits"(
+    "id" INTEGER NOT NULL,
+    "animals-id" INTEGER NOT NULL,
+    "vets_id" INTEGER NOT NULL,
+    "date_of_visit" INTEGER NOT NULL
+);
+ALTER TABLE
+    "visits" ADD PRIMARY KEY("id");
+CREATE TABLE "owners"(
+    "id" INTEGER NOT NULL,
+    "full_name" VARCHAR(255) NOT NULL,
+    "age" INTEGER NOT NULL
+);
+ALTER TABLE
+    "owners" ADD PRIMARY KEY("id");
+CREATE TABLE "animals"(
+    "id" INTEGER NOT NULL,
+    "name" VARCHAR(255) NULL,
+    "date-of-birth" DATE NOT NULL,
+    "escape_attempts" INTEGER NOT NULL,
+    "neutered" BOOLEAN NOT NULL,
+    "weight-kg" DECIMAL(8, 2) NOT NULL,
+    "species_id" INTEGER NOT NULL,
+    "owners_id" INTEGER NOT NULL
+);
+ALTER TABLE
+    "animals" ADD PRIMARY KEY("id");
+CREATE TABLE "species"(
+    "id" INTEGER NOT NULL,
+    "name" VARCHAR(255) NOT NULL
+);
+ALTER TABLE
+    "species" ADD PRIMARY KEY("id");
+CREATE TABLE "specializations"(
+    "id" INTEGER NOT NULL,
+    "species-id" INTEGER NOT NULL,
+    "vets_id" INTEGER NOT NULL
+);
+ALTER TABLE
+    "specializations" ADD PRIMARY KEY("id");
+CREATE TABLE "vets"(
+    "id" INTEGER NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "age" INTEGER NOT NULL,
+    "date_of_graduation" INTEGER NOT NULL
+);
+ALTER TABLE
+    "vets" ADD PRIMARY KEY("id");
